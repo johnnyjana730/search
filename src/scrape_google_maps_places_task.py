@@ -49,7 +49,7 @@ class ScrapeGoogleMapsPlacesTask(BaseTask):
 
                 driver.get_by_current_page_referrer(link)
                 out_dict = {}
-                title = get_heading_text(5)
+                title = get_heading_text(1)
 
                 if title == '':
                     return None
