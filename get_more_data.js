@@ -30,6 +30,14 @@ function get_main_category(data) {
   return data?.[6]?.[13]?.[0]
 }
 
+function get_categories(data) {
+  return data?.[6]?.[13]
+}
+
+function get_cordinates(data) {
+  return [data?.[6]?.[9]?.[2], data?.[6]?.[9]?.[3]]
+}
+
 function get_more_data() {
   let data = parse()
 
@@ -39,6 +47,8 @@ function get_more_data() {
   let title = get_title(data)
   let address = get_address(data)
   let main_category = get_main_category(data)
+  let cordinates = get_cordinates(data)
+  let categories = get_categories(data)
 
   return {
     title,
@@ -46,6 +56,8 @@ function get_more_data() {
     rating,
     reviews,
     address,
+    cordinates,
+    categories,
   }
 }
 

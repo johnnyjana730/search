@@ -55,6 +55,7 @@ class ScrapeGoogleMapsPlacesTask(BaseTask):
                     return None
 
                 out_dict['link'] = link
+
                 try:
                     additional_data = driver.execute_file('get_more_data.js')
                 except selenium.common.exceptions.JavascriptException as E:
