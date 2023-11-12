@@ -224,8 +224,8 @@ class ScrapeGoogleMaps(BaseTask):
 
         new_results = clean(fetched_results, data)
 
-        if os.path.exists("output/" + self.city + '/' + pydash.kebab_case(keyword) ) == False:
-            os.makedirs("output/" + self.city + '/' + pydash.kebab_case(keyword) )
+        if os.path.exists("output/" + self.city + '/') == False:
+            os.makedirs("output/" + self.city + '/')
 
         Output.write_json(new_results, self.city + '/' + pydash.kebab_case(keyword))
         # Output.write_csv(new_results, pydash.kebab_case(keyword))
