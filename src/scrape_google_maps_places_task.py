@@ -57,7 +57,7 @@ class ScrapeGoogleMapsPlacesTask(BaseTask):
                 out_dict['link'] = link
 
                 try:
-                    additional_data = driver.execute_file('google-maps-scraper/get_more_data.js')
+                    additional_data = driver.execute_file('search/get_more_data.js')
                 except selenium.common.exceptions.JavascriptException as E:
                             if driver.is_in_page("consent.google.com", Wait.LONG):
                                 el = driver.get_element_or_none_by_selector('form:nth-child(2) > div > div > button', Wait.LONG)
