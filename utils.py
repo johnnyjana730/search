@@ -49,9 +49,18 @@ def get_saved_result(queries, city):
                 current_output = json.load(file)
 
             print('current_output = ', current_output)
-            if len(current_output) > 0 and len(current_output[0]) > 1:
+            if len(current_output) > 0 and len(current_output[0]) > 1 and 'title' in current_output[0]:
+                current_output[0]['extracted_place_name'] = query['extracted_place_name']
+                current_output[0]['xhs_note_list'] = query['xhs_note_list']
                 outputs.append(current_output[0])
         else:
             n_queries.append(query)
 
     return outputs, n_queries
+
+def check_place_name_valid(place_name):
+    if len(place_name.replace(' ', '')) < 3 and len(place_name.replace(' ', '')) > 50: return False
+    if count_chinese_letters(place_name) > 10: return False
+    if count_english_words(place_name) == 1 and count_chinese_letters(place_name) == 0: return False
+
+    return True
