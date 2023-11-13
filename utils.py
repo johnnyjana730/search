@@ -64,3 +64,38 @@ def check_place_name_valid(place_name):
     if count_english_words(place_name) == 1 and count_chinese_letters(place_name) == 0: return False
 
     return True
+
+transfer_rule = {}
+transfer_rule['tourist_attraction'] = ['spot', 'attraction', 'landmark', 'sculpture', 'tourist', 'boutique']
+transfer_rule['park'] = ['park', 'garden']
+transfer_rule['restaurant'] = ['restaurant', 'tea house']
+transfer_rule['snack'] = ['tea']
+transfer_rule['museum'] = ['museum']
+transfer_rule['worship'] = ['temple', 'worship']
+transfer_rule['natural_feature'] = ['hiking', 'beach']
+transfer_rule['store'] = ['store']
+transfer_rule['hotel'] = ['hotel']
+
+cate2type = {}
+for type_tmp, cate_lt in transfer_rule.items():
+    for cate in cate_lt:
+        cate2type[cate] = type_tmp
+
+def categories_transfer(categories):
+    if categories == None:
+        return ['point_of_interest']
+    n_types = []
+    for cate in categories:
+        for n_cate, n_type in cate2type.items():
+            if n_cate in cate.lower():
+                n_types.append(n_type)
+
+        for unit in cate.lower().split(' '):
+            if unit in transfer_rule:
+                n_types.append(transfer_rule[unit])
+                
+    n_types += categories
+    if len(n_types) == 0:
+        n_types.append('point_of_interest')
+        
+    return n_types
