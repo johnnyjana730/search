@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import pickle
 import pathlib
+import pydash
 import nltk
 # nltk.download('punkt')  # Download the Punkt tokenizer models
 
@@ -35,3 +36,22 @@ def count_english_words(input_text):
     words = nltk.word_tokenize(input_text)
     english_words = [word for word in words if word.isalpha()]  # Filter out non-alphabetic words
     return len(english_words)
+
+def get_saved_result(queries, city):
+    outputs = []
+    n_queries = []
+    for query in queries:
+        # print('keyword = ', current_data['keyword'])
+        output_file_path = './output/' + city + '/' + pydash.kebab_case(query['keyword']) + '.json'
+        print('keyword = ', query['keyword'])
+        if os.path.exists(output_file_path):
+            with open(output_file_path, 'r') as file:
+                current_output = json.load(file)
+
+            print('current_output = ', current_output)
+            if len(current_output) > 0 and len(current_output[0]) > 1:
+                outputs.append(current_output[0])
+        else:
+            n_queries.append(query)
+
+    return outputs, n_queries
