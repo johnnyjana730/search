@@ -69,6 +69,10 @@ def launch_tasks(*tasks):
             # print('current_output = ', current_output)
             if current_output == None or len(current_output) == 0:
                 current_output = [{}]
+
+                if os.path.exists('./output/' + city + '/') == False:
+                    os.makedirs('./output/' + city + '/')
+
                 with open(output_file_path, 'w') as file:
                     json.dump([{}], file)
 
