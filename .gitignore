@@ -111,4 +111,8 @@ profiles/
 output/
 
 temp/
-NEXT-STEPS
+NEXT-STEPS*.png
+
+
+*.png
+*.json

@@ -67,7 +67,7 @@ def launch_tasks(*tasks):
                 current_output = task.begin_task(current_data, task_config)
             # print('current_data = ' , current_data)
             # print('current_output = ', current_output)
-            if len(current_output) == 0 or current_output == None:
+            if current_output == None or len(current_output) == 0:
                 current_output = [{}]
                 with open(output_file_path, 'w') as file:
                     json.dump([{}], file)
