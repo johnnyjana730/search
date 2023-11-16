@@ -116,6 +116,7 @@ class ScrapeGoogleMapsLinksTask(BaseTask):
 
         def get_links():
             def scroll_till_end(times):
+
                 def visit_gmap():
                     endpoint = f'maps/search/{urllib.parse.quote_plus(keyword)}'
                     url = f'https://www.google.com/{endpoint}'
@@ -128,8 +129,10 @@ class ScrapeGoogleMapsLinksTask(BaseTask):
                                 'form:nth-child(2) > div > div > button', Wait.LONG)
                             el.click()
                         print('Revisiting')
-                        visit_gmap()
-
+                        self.count += 1
+                        if len(self.count) < 10:
+                            visit_gmap()
+                self.count = 0
                 visit_gmap()
 
                 number_of_times_not_scrolled = 0
