@@ -16,7 +16,7 @@ sys.path.append("..")
 
 from botasaurus.botasaurus import *
 from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
-from config import number_of_scrapers, queries
+from .config import number_of_scrapers, queries
 from botasaurus.botasaurus.utils import read_json
 import pydash
 
