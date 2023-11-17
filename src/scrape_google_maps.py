@@ -8,8 +8,16 @@ from .config import number_of_scrapers, queries
 from botasaurus.botasaurus.utils import read_json
 import pydash
 
-# sys.stdout
- # = 
+
+# Get the path of the current script
+current_script_path = os.path.abspath(__file__)
+
+# Get the parent directory of the current script
+parent_directory = os.path.dirname(current_script_path)
+
+# Add the parent directory to sys.path
+sys.path.insert(0, parent_directory)
+
 
 def divide_list(input_list, num_of_groups=6, skip_if_less_than=20):
     if skip_if_less_than is not None and len(input_list) < skip_if_less_than:
