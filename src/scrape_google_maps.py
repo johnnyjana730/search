@@ -11,7 +11,7 @@ import sys
 # parent_directory = os.path.dirname(current_script_path)
 
 # Add the parent directory to sys.path
-# sys.path.insert(0, '../')
+sys.path.insert(0, '../')
 
 
 from botasaurus.botasaurus.init import *
