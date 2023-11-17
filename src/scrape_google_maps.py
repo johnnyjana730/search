@@ -14,7 +14,7 @@ import sys
 sys.path.insert(0, '../')
 
 
-from botasaurus.botasaurus import *
+from botasaurus.botasaurus.init import *
 from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
 from .config import number_of_scrapers, queries
 from botasaurus.botasaurus.utils import read_json
