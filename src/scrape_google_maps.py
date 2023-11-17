@@ -3,15 +3,14 @@ import os
 import urllib.parse
 import sys
 
+# Get the path of the current script
+current_script_path = os.path.abspath(__file__)
 
-# # Get the path of the current script
-# current_script_path = os.path.abspath(__file__)
-
-# # Get the parent directory of the current script
-# parent_directory = os.path.dirname(current_script_path)
+# Get the parent directory of the current script
+parent_directory = os.path.dirname(current_script_path)
 
 # Add the parent directory to sys.path
-# sys.path.insert(0, '../')
+sys.path.insert(0, parent_directory)
 
 
 from .botasaurus.botasaurus import *
