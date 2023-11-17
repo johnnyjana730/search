@@ -2,11 +2,6 @@ import hashlib
 import os
 import urllib.parse
 import sys
-from botasaurus.botasaurus import *
-from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
-from .config import number_of_scrapers, queries
-from botasaurus.botasaurus.utils import read_json
-import pydash
 
 
 # Get the path of the current script
@@ -17,6 +12,14 @@ parent_directory = os.path.dirname(current_script_path)
 
 # Add the parent directory to sys.path
 sys.path.insert(0, parent_directory)
+
+
+from botasaurus.botasaurus import *
+from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
+from .config import number_of_scrapers, queries
+from botasaurus.botasaurus.utils import read_json
+import pydash
+
 
 
 def divide_list(input_list, num_of_groups=6, skip_if_less_than=20):
