@@ -13,10 +13,10 @@ parent_directory = os.path.dirname(current_script_path)
 sys.path.insert(0, parent_directory)
 
 
-from .botasaurus.botasaurus import *
-from .src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
+from ..botasaurus.botasaurus import *
+from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
 from .config import number_of_scrapers, queries
-from .botasaurus.botasaurus.utils import read_json
+from ..botasaurus.botasaurus.utils import read_json
 import pydash
 
 
