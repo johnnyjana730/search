@@ -161,11 +161,11 @@ class BaseTask():
                 task.end()
                 task.set_ip()
                 data = task.get_data()
-                driver.save_screenshot(final_image)
+                # driver.save_screenshot(final_image)
                 
                 html_path  = f'{self.task_path}/page.html'
                 source = get_page_source_safe(driver)
-                write_html(source, html_path)
+                # write_html(source, html_path)
 
                 data["last_url"] = get_driver_url_safe(driver)
                 
@@ -179,7 +179,7 @@ class BaseTask():
                 if driver._init_data is not None:
                     data = merge_dicts_in_one_dict(data , driver._init_data)
                 
-                write_json(data , task_info_path)
+                # write_json(data , task_info_path)
                 Analytics.send_tracking_data(task_name)
             count = LocalStorage.get_item('count', 0) + 1
             LocalStorage.set_item('count', count)
