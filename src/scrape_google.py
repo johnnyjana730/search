@@ -140,6 +140,13 @@ class ScrapeGoogleSearch(BaseTask):
         content_selector = "div.v7W49e"
         new_results = driver.text(content_selector)
 
+        try:
+            content_selector = "div.I6TXqe"
+            new_results += "***********"
+            new_results += driver.text(content_selector)
+        except:
+            pass
+
         print('new_results = ', new_results)
         # result = self.parallel(
         # #     self.save_google, divided_list, len(divided_list))
