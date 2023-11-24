@@ -102,8 +102,6 @@ class ScrapeGoogleSearch(BaseTask):
         for query in self.queries:
 
             keyword = query["keyword"]
-            extracted_place_name = query["extracted_place_name"]
-            xhs_note_list = query['xhs_note_list']
             print('keyword = ', keyword)
             keyword_kebab = pydash.kebab_case(keyword)
             filepath = os.path.join("output", keyword_kebab + ".json")
@@ -121,8 +119,7 @@ class ScrapeGoogleSearch(BaseTask):
 
                     if stored_query == query and stored_hash == file_hash:
                         # print(f'Skipping query "{keyword}" as it is already scraped.') 
-                        result.append({"filepath": filepath, "keyword": keyword,
-                             'extracted_place_name': extracted_place_name, 'xhs_note_list': xhs_note_list})
+                        result.append({"filepath": filepath, "keyword": keyword})
                     else:
                         result.append(query)
                 else:

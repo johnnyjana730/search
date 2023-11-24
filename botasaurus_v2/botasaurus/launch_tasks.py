@@ -96,8 +96,7 @@ def launch_tasks(*tasks):
                 n_current_output = {}
                 n_current_output['google_search_data'] = current_output
                 n_current_output['keyword'] = current_data['keyword']
-                n_current_output['extracted_place_name'] = current_data['extracted_place_name']
-                n_current_output['xhs_note_list'] = current_data['xhs_note_list']
+                n_current_output['found_place_name'] = current_data['found_place_name']
                 n_current_output['job_type'] = current_data['job_type']
                 current_output = [n_current_output]
 
