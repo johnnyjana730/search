@@ -55,8 +55,12 @@ def launch_tasks(*tasks):
             delay = schedules[index]['delay']
 
             print('keyword = ', current_data['keyword'])
-            output_file_path = './output/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
-            # print('output_file_path = ', output_file_path, os.path.exists(output_file_path))
+
+            if current_data['job_type'] == 'google_map':
+                output_file_path = './output/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
+            elif  current_data['job_type'] == 'google_search':
+                output_file_path = './output/search/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
+
             task_begin = False
             if os.path.exists(output_file_path):
                 with open(output_file_path, 'r') as file:
@@ -65,10 +69,13 @@ def launch_tasks(*tasks):
             else:
                 task_begin = True
                 current_output = task.begin_task(current_data, task_config)
-            # print('current_data = ' , current_data)
-            # print('current_output = ', current_output)
+
             if current_output == None or len(current_output) == 0:
                 current_output = [{}]
+
+
+                if os.path.exists('./output/search/' + city + '/') == False:
+                    os.makedirs('./output/search/' + city + '/')
 
                 if os.path.exists('./output/' + city + '/') == False:
                     os.makedirs('./output/' + city + '/')
@@ -79,10 +86,20 @@ def launch_tasks(*tasks):
             print('result = ', current_output)
             print('')
 
-            if current_output != None and len(current_output) > 0:
-                current_output[0]['keyword'] = current_data['keyword']
-                current_output[0]['extracted_place_name'] = current_data['extracted_place_name']
-                current_output[0]['xhs_note_list'] = current_data['xhs_note_list']
+            if current_data['job_type'] == 'google_map':
+                if current_output != None and len(current_output) > 0:
+                    current_output[0]['keyword'] = current_data['keyword']
+                    current_output[0]['extracted_place_name'] = current_data['extracted_place_name']
+                    current_output[0]['xhs_note_list'] = current_data['xhs_note_list']
+            
+            elif current_data['job_type'] == 'google_search':
+                n_current_output = {}
+                n_current_output['google_search_data'] = current_output
+                n_current_output['keyword'] = current_data['keyword']
+                n_current_output['extracted_place_name'] = current_data['extracted_place_name']
+                n_current_output['xhs_note_list'] = current_data['xhs_note_list']
+                n_current_output['job_type'] = current_data['job_type']
+                current_output = [n_current_output]
 
 
             if type(current_output) is dict:

@@ -64,7 +64,7 @@ def clean(data_list, query):
     return new_results
 
 
-class ScrapeGoogleMaps(BaseTask):
+class ScrapeGoogleSearch(BaseTask):
 
     task_config = TaskConfig(output_filename="all",
                              log_time=False,
@@ -137,111 +137,28 @@ class ScrapeGoogleMaps(BaseTask):
 
         keyword = data['keyword']
         keyword_kebab = pydash.kebab_case(keyword)
-        max_results = 1
-        ns = number_of_scrapers if number_of_scrapers is not None else 4
 
-        def get_links():
-            def scroll_till_end(times):
-                def visit_gmap():
-                    endpoint = f'maps/search/{urllib.parse.quote_plus(keyword)}'
-                    url = f'https://www.google.com/{endpoint}'
-
-                    driver.get_by_current_page_referrer(url)
-
-                    if not driver.is_in_page(endpoint, Wait.LONG):
-                        if driver.is_in_page("consent.google.com", Wait.SHORT):
-                            el = driver.get_element_or_none_by_selector(
-                                'form:nth-child(2) > div > div > button', Wait.LONG)
-                            el.click()
-                        # print('Revisiting')
-                        visit_gmap()
-
-                visit_gmap()
-
-                number_of_times_not_scrolled = 0
-                while True:
-                    el = driver.get_element_or_none_by_selector(
-                        '[role="feed"]', Wait.LONG)
-
-                    if el is None:                   
-                        rst = [driver.current_url]
-                        return True, rst
-                    else:
-                        did_element_scroll = driver.scroll_element(el)
-
-                        end_el = driver.get_element_or_none_by_selector(
-                            "p.fontBodyMedium > span > span", Wait.SHORT)
-
-                        if end_el is not None:
-                            driver.scroll_element(el)
-                            return False, []
-
-                        if not did_element_scroll:
-                            driver.sleep(0.1)
-                            number_of_times_not_scrolled += 1
-
-                            if number_of_times_not_scrolled > 20:
-                                print(
-                                    'Google Maps was Stuck in Scrolling. So returning.')
-                                return False, []
-
-                            print('Scrolling...')
-                        else:
-                            number_of_times_not_scrolled = 0
-                            print('Scrolling...')
-
-                        if max_results is None:
-                            pass
-                        else:
-                            els = driver.get_elements_or_none_by_selector(
-                                '[role="feed"] >  div > div > a', Wait.LONG)
-                            if len(els) >= max_results:
-                                return False, []
-
-            
-            should_exit, result = scroll_till_end(1)
-            
-
-            if should_exit:
-                return result
-            
-            def extract_links(elements):
-                def extract_link(el):
-                    return el.get_attribute("href")
-
-                return list(map(extract_link, elements))
-
-            els = driver.get_elements_or_none_by_selector(
-                '[role="feed"] >  div > div > a', Wait.LONG)
-            links = extract_links(els)
-
-            if max_results is not None:
-                return links[:max_results]
-            return links
         driver.get_google()
-        links = get_links()
+        driver.get("https://www.google.com/search?q=" + keyword)
+        content_selector = "div.v7W49e"
+        new_results = driver.text(content_selector)
 
-        # Don't know why but google maps sometimes give duplicate links.
-        links  = pydash.uniq(links)
-        # print(f'Fetched {len(links)} links.')     
-        skip_if_less_than = 12
-        divided_list = divide_list(links, ns, skip_if_less_than)
+        print('new_results = ', new_results)
+        # result = self.parallel(
+        # #     self.save_google, divided_list, len(divided_list))
+        # fetched_results = pydash.flatten(result)
 
-        result = self.parallel(
-            self.save_google, divided_list, len(divided_list))
-        fetched_results = pydash.flatten(result)
+        # # print('fetched_results = ', fetched_results)
 
-        # print('fetched_results = ', fetched_results)
+        # new_results = clean(fetched_results, data)
 
-        new_results = clean(fetched_results, data)
+        if os.path.exists("output/search/" + self.city + '/') == False:
+            os.makedirs("output/search/" + self.city + '/')
 
-        if os.path.exists("output/" + self.city + '/') == False:
-            os.makedirs("output/" + self.city + '/')
-
-        Output.write_json(new_results, self.city + '/' + pydash.kebab_case(keyword))
+        Output.write_json(new_results, "search/" + self.city + '/' + pydash.kebab_case(keyword))
         # Output.write_csv(new_results, pydash.kebab_case(keyword))
 
-        filepath = os.path.join("output", self.city + '/' + keyword_kebab + ".json")
+        filepath = os.path.join("output/search/", self.city + '/' + keyword_kebab + ".json")
         with open(filepath, 'r') as f:
                 file_content = f.read()
                 file_hash = hashlib.md5(file_content.encode()).hexdigest()                      
