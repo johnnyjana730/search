@@ -141,6 +141,13 @@ class ScrapeGoogleSearch(BaseTask):
         new_results = driver.text(content_selector)
 
         try:
+            content_selector = "div.xQjRM"
+            new_results += "***********"
+            new_results += driver.text(content_selector)
+        except:
+            pass
+
+        try:
             content_selector = "div.I6TXqe"
             new_results += "***********"
             new_results += driver.text(content_selector)
