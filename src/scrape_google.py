@@ -155,7 +155,7 @@ class ScrapeGoogleSearch(BaseTask):
             pass
 
 
-        for div_pt in ['TQc1id', 'HdbW6', 'VkpGBb']:
+        for div_pt in ['TQc1id', 'HdbW6', 'VkpGBb', "SPZz6b"]:
             try:
                 content_selector = "div." + div_pt
                 new_results += "***********"
