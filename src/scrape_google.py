@@ -154,6 +154,16 @@ class ScrapeGoogleSearch(BaseTask):
         except:
             pass
 
+
+        for div_pt in ['TQc1id', 'HdbW6', 'VkpGBb']:
+            try:
+                content_selector = "div." + div_pt
+                new_results += "***********"
+                new_results += driver.text(content_selector)
+            except:
+                pass
+
+
         print('new_results = ', new_results)
         # result = self.parallel(
         # #     self.save_google, divided_list, len(divided_list))
