@@ -21,10 +21,14 @@ from botasaurus_v2.botasaurus.utils import read_json
 import pydash
 
 div_mapping = {}
-div_mapping["PZPZlf"] = "NA_right_map_title"
+div_mapping["SPZz6b"] = "NA_right_map_title"
 div_mapping["I6TXqe"] = "NA_right_map_result"
 div_mapping["aiAXrc"] = "NA_mid_map_title"
 
+
+div_mapping["DoxwDb"] = "NA_right_map_title"
+div_mapping["TQc1id"] = "NA_right_map_result"
+div_mapping["aiAXrc"] = "NA_mid_map_title"
 
 
 def divide_list(input_list, num_of_groups=6, skip_if_less_than=20):
@@ -157,30 +161,61 @@ class ScrapeGoogleSearch(BaseTask):
 
         #     new_results += "***********"
 
-        # DoxwDb
-        # Hhmu2e wDYxhc NFQFxe viOShc LKPcQc
+        NA_right_map_title = ""
+        NA_right_map_result = ""
+        NA_mid_map_title = ""
 
-        for div_pt in ['PZPZlf']:
-            content_selector = "h2." + div_pt
-            new_results += "***********" + div_mapping[div_pt] + ':'
-            try:
-                new_results += driver.text(content_selector)
-            except:
-                pass
-            new_results += "***********"
-
-        for div_pt in ['aiAXrc', 'I6TXqe']:
+        for div_pt in ['DoxwDb', "SPZz6b"]:
             content_selector = "div." + div_pt
-            new_results += "***********" + div_mapping[div_pt] + ':'
+            # new_results += "***********" + div_mapping[div_pt] + ':'
             try:
-                new_results += driver.text(content_selector)
+                tmp = driver.text(content_selector)
+                if len(tmp) > 0:
+                    NA_right_map_title = tmp
             except:
                 pass
-            new_results += "***********"
+            # new_results += "***********"
+
+        for div_pt in ['TQc1id', "I6TXqe"]:
+            content_selector = "div." + div_pt
+            try:
+                tmp = driver.text(content_selector)
+                if len(tmp) > 0:
+                    NA_right_map_result = tmp
+            except:
+                pass
+
+        for div_pt in ['aiAXrc']:
+            content_selector = "div." + div_pt
+            try:
+                tmp = driver.text(content_selector)
+                if len(tmp) > 0:
+                    NA_mid_map_title = tmp
+            except:
+                pass
+        
+        new_results += "***********NA_right_map_title:" + NA_right_map_title + "***********"
+        new_results += "***********NA_right_map_result:" + NA_right_map_result + "***********"
+        new_results += "***********NA_mid_map_title:" + NA_mid_map_title + "***********"
 
 
+        # for div_pt in ['aiAXrc']:
+        #     content_selector = "div." + div_pt
+        #     new_results += "***********" + div_mapping[div_pt] + ':'
+        #     try:
+        #         new_results += driver.text(content_selector)
+        #     except:
+        #         pass
+        #     new_results += "***********"
 
-        # SPZz6b
+        # div_mapping["SPZz6b"] = "NA_right_map_title"
+        # div_mapping["I6TXqe"] = "NA_right_map_result"
+        # div_mapping["aiAXrc"] = "NA_mid_map_title"
+
+
+        # div_mapping["DoxwDb"] = "NA_right_map_title"
+        # div_mapping["TQc1id"] = "NA_right_map_result"
+        # div_mapping["aiAXrc"] = "NA_mid_map_title"
 
         # div_mapping["PZPZlf"] = "北美右map_title"
         # div_mapping["aiAXrc"] = "北美中map_title"
