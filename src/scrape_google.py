@@ -21,7 +21,7 @@ from botasaurus_v2.botasaurus.utils import read_json
 import pydash
 
 div_mapping = {}
-div_mapping["SPZz6b"] = "NA_right_map_title"
+div_mapping["PZPZlf"] = "NA_right_map_title"
 div_mapping["I6TXqe"] = "NA_right_map_result"
 div_mapping["aiAXrc"] = "NA_mid_map_title"
 
@@ -157,8 +157,19 @@ class ScrapeGoogleSearch(BaseTask):
 
         #     new_results += "***********"
 
+        # DoxwDb
+        # Hhmu2e wDYxhc NFQFxe viOShc LKPcQc
 
-        for div_pt in ['SPZz6b', 'aiAXrc', 'I6TXqe']:
+        for div_pt in ['PZPZlf']:
+            content_selector = "h2." + div_pt
+            new_results += "***********" + div_mapping[div_pt] + ':'
+            try:
+                new_results += driver.text(content_selector)
+            except:
+                pass
+            new_results += "***********"
+
+        for div_pt in ['aiAXrc', 'I6TXqe']:
             content_selector = "div." + div_pt
             new_results += "***********" + div_mapping[div_pt] + ':'
             try:
@@ -166,6 +177,8 @@ class ScrapeGoogleSearch(BaseTask):
             except:
                 pass
             new_results += "***********"
+
+
 
         # SPZz6b
 
