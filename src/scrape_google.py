@@ -20,6 +20,11 @@ from .config import number_of_scrapers, queries
 from botasaurus_v2.botasaurus.utils import read_json
 import pydash
 
+div_mapping = {}
+div_mapping["PZPZlf"] = "北美右map_title"
+div_mapping["I6TXqe"] = "北美右map_result"
+div_mapping["aiAXrc"] = "北美中map_title"
+
 
 
 def divide_list(input_list, num_of_groups=6, skip_if_less_than=20):
@@ -140,31 +145,30 @@ class ScrapeGoogleSearch(BaseTask):
         content_selector = "div.v7W49e"
         new_results = driver.text(content_selector)
 
-        try:
-            content_selector = "div.xQjRM"
-            new_results += "***********"
+
+        # for div_pt in ['xQjRM', 'I6TXqe', 'TQc1id', 'HdbW6', 'VkpGBb', 'tNxQIb', "SPZz6b", 'hHq9Z']:
+        #     content_selector = "div." + div_pt
+        #     new_results += "***********" + content_selector + ':'
+
+        #     try:
+        #         new_results += driver.text(content_selector)
+        #     except:
+        #         pass
+
+        #     new_results += "***********"
+
+
+        for div_pt in ['PZPZlf', 'aiAXrc', 'I6TXqe']:
+            content_selector = "div." + div_pt
+            new_results += "***********" + div_mapping[div_pt] + ':'
             new_results += driver.text(content_selector)
-        except:
-            pass
-
-        try:
-            content_selector = "div.I6TXqe"
             new_results += "***********"
-            new_results += driver.text(content_selector)
-        except:
-            pass
 
+        # div_mapping["PZPZlf"] = "北美右map_title"
+        # div_mapping["aiAXrc"] = "北美中map_title"
+        # div_mapping["I6TXqe"] = "北美右map_result"
 
-        for div_pt in ['TQc1id', 'HdbW6', 'VkpGBb', 'tNxQIb', "SPZz6b", 'hHq9Z']:
-            try:
-                content_selector = "div." + div_pt
-                new_results += "***********"
-                new_results += driver.text(content_selector)
-            except:
-                pass
-
-
-        print('new_results = ', new_results)
+        # print('new_results = ', new_results)
         # result = self.parallel(
         # #     self.save_google, divided_list, len(divided_list))
         # fetched_results = pydash.flatten(result)
