@@ -161,7 +161,10 @@ class ScrapeGoogleSearch(BaseTask):
         for div_pt in ['PZPZlf', 'aiAXrc', 'I6TXqe']:
             content_selector = "div." + div_pt
             new_results += "***********" + div_mapping[div_pt] + ':'
-            new_results += driver.text(content_selector)
+            try:
+                new_results += driver.text(content_selector)
+            except:
+                pass
             new_results += "***********"
 
         # div_mapping["PZPZlf"] = "北美右map_title"
