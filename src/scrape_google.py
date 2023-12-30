@@ -21,9 +21,9 @@ from botasaurus_v2.botasaurus.utils import read_json
 import pydash
 
 div_mapping = {}
-div_mapping["PZPZlf"] = "北美右map_title"
-div_mapping["I6TXqe"] = "北美右map_result"
-div_mapping["aiAXrc"] = "北美中map_title"
+div_mapping["PZPZlf"] = "NA_right_map_title"
+div_mapping["I6TXqe"] = "NA_right_map_result"
+div_mapping["aiAXrc"] = "NA_mid_map_title"
 
 
 
