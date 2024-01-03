@@ -150,53 +150,65 @@ class ScrapeGoogleSearch(BaseTask):
         new_results = driver.text(content_selector)
 
 
-        # for div_pt in ['xQjRM', 'I6TXqe', 'TQc1id', 'HdbW6', 'VkpGBb', 'tNxQIb', "SPZz6b", 'hHq9Z']:
-        #     content_selector = "div." + div_pt
-        #     new_results += "***********" + content_selector + ':'
+        try:
+            content_selector = "div.xQjRM"
+            new_results += "***********"
+            new_results += driver.text(content_selector)
+        except:
+            pass
 
+        try:
+            content_selector = "div.I6TXqe"
+            new_results += "***********"
+            new_results += driver.text(content_selector)
+        except:
+            pass
+
+
+        for div_pt in ['TQc1id', 'HdbW6', 'VkpGBb', 'tNxQIb', "SPZz6b", 'hHq9Z']:
+            try:
+                content_selector = "div." + div_pt
+                new_results += "***********"
+                new_results += driver.text(content_selector)
+            except:
+                pass
+
+        # NA_right_map_title = ""
+        # NA_right_map_result = ""
+        # NA_mid_map_title = ""
+
+        # for div_pt in ['DoxwDb', "SPZz6b"]:
+        #     content_selector = "div." + div_pt
+        #     # new_results += "***********" + div_mapping[div_pt] + ':'
         #     try:
-        #         new_results += driver.text(content_selector)
+        #         tmp = driver.text(content_selector)
+        #         if len(tmp) > 0:
+        #             NA_right_map_title = tmp
+        #     except:
+        #         pass
+        #     # new_results += "***********"
+
+        # for div_pt in ['TQc1id', "I6TXqe"]:
+        #     content_selector = "div." + div_pt
+        #     try:
+        #         tmp = driver.text(content_selector)
+        #         if len(tmp) > 0:
+        #             NA_right_map_result = tmp
         #     except:
         #         pass
 
-        #     new_results += "***********"
-
-        NA_right_map_title = ""
-        NA_right_map_result = ""
-        NA_mid_map_title = ""
-
-        for div_pt in ['DoxwDb', "SPZz6b"]:
-            content_selector = "div." + div_pt
-            # new_results += "***********" + div_mapping[div_pt] + ':'
-            try:
-                tmp = driver.text(content_selector)
-                if len(tmp) > 0:
-                    NA_right_map_title = tmp
-            except:
-                pass
-            # new_results += "***********"
-
-        for div_pt in ['TQc1id', "I6TXqe"]:
-            content_selector = "div." + div_pt
-            try:
-                tmp = driver.text(content_selector)
-                if len(tmp) > 0:
-                    NA_right_map_result = tmp
-            except:
-                pass
-
-        for div_pt in ['aiAXrc']:
-            content_selector = "div." + div_pt
-            try:
-                tmp = driver.text(content_selector)
-                if len(tmp) > 0:
-                    NA_mid_map_title = tmp
-            except:
-                pass
+        # for div_pt in ['aiAXrc']:
+        #     content_selector = "div." + div_pt
+        #     try:
+        #         tmp = driver.text(content_selector)
+        #         if len(tmp) > 0:
+        #             NA_mid_map_title = tmp
+        #     except:
+        #         pass
         
-        new_results += "***********NA_right_map_title:" + NA_right_map_title + "***********"
-        new_results += "***********NA_right_map_result:" + NA_right_map_result + "***********"
-        new_results += "***********NA_mid_map_title:" + NA_mid_map_title + "***********"
+        # new_results += "***********NA_right_map_title:" + NA_right_map_title + "***********"
+        # new_results += "***********NA_right_map_result:" + NA_right_map_result + "***********"
+        # new_results += "***********NA_mid_map_title:" + NA_mid_map_title + "***********"
 
 
         # for div_pt in ['aiAXrc']:
