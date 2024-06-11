@@ -183,7 +183,7 @@ class ScrapeGoogleSearch(BaseTask):
         elements = driver.find_elements(By.CSS_SELECTOR, "div, p, span, h1, h2, h3, h4, h5, h6, a, li, td, th")
 
         # Extract text from each element
-        all_text = [element.text for element in elements if element.text]
+        all_text = ' '.join([element.text for element in elements if element.text])
 
         if len(new_results) < 100:
             new_results += ' ' + all_text
