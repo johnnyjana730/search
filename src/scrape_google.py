@@ -187,7 +187,8 @@ class ScrapeGoogleSearch(BaseTask):
 
         if len(new_results) < 100:
             new_results += ' ' + all_text
-        
+
+        print('new_results  = ', new_results )        
         # NA_right_map_title = ""
         # NA_right_map_result = ""
         # NA_mid_map_title = ""
