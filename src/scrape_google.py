@@ -19,6 +19,7 @@ from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
 from .config import number_of_scrapers, queries
 from botasaurus_v2.botasaurus.utils import read_json
 import pydash
+from selenium.webdriver.common.by import By
 
 div_mapping = {}
 div_mapping["SPZz6b"] = "NA_right_map_title"
@@ -173,6 +174,16 @@ class ScrapeGoogleSearch(BaseTask):
             except:
                 pass
 
+        # for the page like jp not result found add all text
+        # Select all elements and get their text
+        elements = driver.find_elements(By.CSS_SELECTOR, "div, p, span, h1, h2, h3, h4, h5, h6, a, li, td, th")
+
+        # Extract text from each element
+        all_text = [element.text for element in elements if element.text]
+
+        if len(new_results) < 100:
+            new_results += ' ' + all_text
+        
         # NA_right_map_title = ""
         # NA_right_map_result = ""
         # NA_mid_map_title = ""
