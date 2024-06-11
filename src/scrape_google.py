@@ -186,7 +186,7 @@ class ScrapeGoogleSearch(BaseTask):
         all_text = ' '.join([element.text for element in elements if element.text])
 
         if len(new_results) < 100:
-            new_results += ' ' + all_text
+            new_results += ' ' + all_text[:20000]
 
         print('new_results  = ', new_results[:20000])        
         # NA_right_map_title = ""
