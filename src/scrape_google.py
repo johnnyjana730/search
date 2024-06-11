@@ -149,21 +149,24 @@ class ScrapeGoogleSearch(BaseTask):
         driver.get("https://www.google.com/search?q=" + keyword)
         content_selector = "div.v7W49e"
         new_results = driver.text(content_selector)
-
+        
+        if new_results == None:
+            new_results = ''
 
         try:
             content_selector = "div.xQjRM"
             new_results += "***********"
             new_results += driver.text(content_selector)
-        except:
-            pass
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
         try:
             content_selector = "div.I6TXqe"
             new_results += "***********"
             new_results += driver.text(content_selector)
-        except:
-            pass
+        except Exception as e:
+            print(f"An error occurred: {e}")
+
 
 
         for div_pt in ['TQc1id', 'HdbW6', 'VkpGBb', 'tNxQIb', "SPZz6b", 'hHq9Z']:
@@ -171,8 +174,9 @@ class ScrapeGoogleSearch(BaseTask):
                 content_selector = "div." + div_pt
                 new_results += "***********"
                 new_results += driver.text(content_selector)
-            except:
-                pass
+            except Exception as e:
+                print(f"An error occurred: {e}")
+
 
         # for the page like jp not result found add all text
         # Select all elements and get their text
