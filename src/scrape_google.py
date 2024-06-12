@@ -226,7 +226,6 @@ class ScrapeGoogleSearch(BaseTask):
         # new_results += "***********NA_right_map_result:" + NA_right_map_result + "***********"
         # new_results += "***********NA_mid_map_title:" + NA_mid_map_title + "***********"
 
-
         # for div_pt in ['aiAXrc']:
         #     content_selector = "div." + div_pt
         #     new_results += "***********" + div_mapping[div_pt] + ':'
