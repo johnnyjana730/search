@@ -83,7 +83,7 @@ def launch_tasks(*tasks):
                 with open(output_file_path, 'w') as file:
                     json.dump([{}], file)
 
-            print('result = ', current_output)
+            print('result[:100] = ', current_output[:100], 'len(current_output) = ', len(current_output))
             print('')
 
             if current_data['job_type'] == 'google_map':
