@@ -12,12 +12,17 @@ import sys
 # # Add the parent directory to sys.path
 # sys.path.insert(0, parent_directory)
 
-sys.path.append("..")
+# sys.path.append("..")
 
-from botasaurus_v2.botasaurus import *
-from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
+from ..botasaurus_v2.botasaurus import *
+from ..botasaurus_v2.botasaurus.utils import read_json
+from .scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
+
+
+# from botasaurus_v2.botasaurus import *
+# from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
 from .config import number_of_scrapers, queries
-from botasaurus_v2.botasaurus.utils import read_json
+# from botasaurus_v2.botasaurus.utils import read_json
 import pydash
 
 
