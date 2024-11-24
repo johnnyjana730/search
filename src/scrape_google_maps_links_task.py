@@ -63,7 +63,7 @@ class ScrapeGoogleMapsLinksTask(BaseTask):
                              )
 
     browser_config = BrowserConfig(
-        block_images_fonts_css=True,
+        # block_images_fonts_css=True,
         # Do not make it eager as it leads to the loss of fields and previous data get used instead of new one.
         # is_eager=True,
         headless=True,
