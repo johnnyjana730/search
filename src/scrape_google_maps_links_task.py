@@ -2,7 +2,12 @@ import hashlib
 import os
 import urllib.parse
 from bose import *
-from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
+
+from ..botasaurus_v2.botasaurus import *
+from ..botasaurus_v2.botasaurus.utils import read_json
+from .scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
+
+# from src.scrape_google_maps_places_task import ScrapeGoogleMapsPlacesTask
 from .config import number_of_scrapers, queries
 from bose.utils import read_json
 import pydash
