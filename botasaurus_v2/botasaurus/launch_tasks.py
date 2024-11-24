@@ -56,19 +56,23 @@ def launch_tasks(*tasks):
 
             print('keyword = ', current_data['keyword'])
 
-            if current_data['job_type'] == 'google_map':
-                output_file_path = './output/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
-            elif  current_data['job_type'] == 'google_search':
-                output_file_path = './output/search/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
+            # @ for loading cache results
+            # if current_data['job_type'] == 'google_map':
+            #     output_file_path = './output/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
+            # elif  current_data['job_type'] == 'google_search':
+            #     output_file_path = './output/search/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
 
-            task_begin = False
-            if os.path.exists(output_file_path):
-                with open(output_file_path, 'r') as file:
-                    current_output = json.load(file)
+            # task_begin = False
+            # if os.path.exists(output_file_path):
+            #     with open(output_file_path, 'r') as file:
+            #         current_output = json.load(file)
 
-            else:
-                task_begin = True
-                current_output = task.begin_task(current_data, task_config)
+            # else:
+            #     task_begin = True
+            #     current_output = task.begin_task(current_data, task_config)
+
+            task_begin = True
+            current_output = task.begin_task(current_data, task_config)
 
             if current_output == None or len(current_output) == 0:
                 current_output = [{}]
