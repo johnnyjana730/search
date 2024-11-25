@@ -57,10 +57,10 @@ def launch_tasks(*tasks):
             print('keyword = ', current_data['keyword'])
 
             # @ for loading cache results
-            # if current_data['job_type'] == 'google_map':
-            #     output_file_path = './output/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
-            # elif  current_data['job_type'] == 'google_search':
-            #     output_file_path = './output/search/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
+            if current_data['job_type'] == 'google_map':
+                output_file_path = './output/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
+            elif  current_data['job_type'] == 'google_search':
+                output_file_path = './output/search/' + city + '/' + pydash.kebab_case(current_data['keyword']) + '.json'
 
             # task_begin = False
             # if os.path.exists(output_file_path):
@@ -84,8 +84,8 @@ def launch_tasks(*tasks):
                 if os.path.exists('./output/' + city + '/') == False:
                     os.makedirs('./output/' + city + '/')
 
-                with open(output_file_path, 'w') as file:
-                    json.dump([{}], file)
+                # with open(output_file_path, 'w') as file:
+                #     json.dump([{}], file)
 
             print('result[:100] = ', current_output[:100], 'len(current_output) = ', len(current_output))
             print('')
